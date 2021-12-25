@@ -57,7 +57,6 @@
                         @else
                             N/A
                         @endif
-
                     </td>
                     <td>
                         @if ($user->status == 'ACTIVE')
@@ -89,7 +88,7 @@
         <tfoot>
             <tr>
                 <td colspan=10>
-                    {{ $users->appends(Request::all())->links() }}
+                    {{ $users->appends(Request::all())->links("pagination::bootstrap-4") }}
                 </td>
             </tr>
         </tfoot>

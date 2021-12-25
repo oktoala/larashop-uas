@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,6 @@ Route::get('/', function() {
 });
 
 Route::resource("users", UserController::class);
+Route::resource("categories", Category::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

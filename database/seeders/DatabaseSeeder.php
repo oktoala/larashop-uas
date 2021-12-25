@@ -22,10 +22,14 @@ class DatabaseSeeder extends Seeder
             'roles' => json_encode(["ADMIN"]),
             'phone' => '0823',
             'password' => Hash::make("larashop"),
-            'avatar' => 'nopic.png',
+            'avatar' => 'avatars/nopic.png',
             'address' => 'Sarmili, Bintaro, Tanggerang Selatan'
         ]);
 
         $this->command->info("Berhasil Buat Admin");
+
+        User::factory(14)->create();
+
+        $this->command->info("Berhasil Buat Random User");
     }
 }

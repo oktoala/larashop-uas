@@ -14,10 +14,32 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $users = User::paginate(10);
+        $keyword = $request->get('keyword');
+        $status = $request->get('status');
+
+        if ($status) {
+            $users = User::where('status', $status)->paginate(10);
+        } else {
+            $users = User::paginate(10);
+        }
+
+        if ($keyword) {
+            if ($status) {
+                $users = User::where('email', 'LIKE', "%$keyword%")
+                    ->where('status', $status)
+                    ->paginate(10);
+            } else {
+                $users = User::where('email', 'LIKE', "%$keyword%")
+                    ->paginate(10);
+            }
+        }
+
         return view('users.index', [
-            "users" => User::paginate(10),
+            "users" => $users,
         ]);
     }
 
@@ -114,7 +136,7 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             $validator['avatar'] = $request->file('avatar')->store('avatars', 'public');
             if ($user->avatar !== 'avatars/nopic.png') {
-                Storage::delete('public/'.$user->avatar);
+                Storage::delete('public/' . $user->avatar);
             }
         }
 

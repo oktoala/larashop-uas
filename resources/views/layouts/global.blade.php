@@ -9,14 +9,12 @@
     <link rel="stylesheet" href="{{ asset('polished/polished.min.css') }}">
     <link rel="stylesheet" href="{{ asset('polished/iconic/css/open-iconic-bootstrap.min.css') }}">
 </head>
-
 <body>
     <nav class="navbar navbar-expand p-0">
-        <a class="navbar-brand text-center col-xs-12 col-md-3 col-lg-2 mr-0" href="index.html"> Larashop </a>
+        <a class="navbar-brand text-center col-xs-12 col-md-3 col-lg-2 mr-0" href="/home"> Larashop </a>
         <button class="btn btn-link d-block d-md-none" data-toggle="collapse" data-target="#sidebar-nav" role="button">
             <span class="oi oi-menu"></span>
         </button>
-
         <input class="border-dark bg-primary-darkest form-control d-none d-md-block w-50 ml-3 mr-2" type="text"
             placeholder="Search" aria-label="Search">
         <div class="dropdown d-none d-md-block">
@@ -48,14 +46,10 @@
                     <input class="border-dark form-control d-block d-md-none mb-4" type="text" placeholder="Search"
                         aria-label="Search" />
                     <li><a href="/home"><span class="oi oi-home"></span> Home</a></li>
-                    {{-- <li><a href="{{ route('users.index') }}"><span class="oi oi-people"></span> Manage users</a>
-                    </li>
-                    <li><a href="{{ route('categories.index') }}"><span class="oi oi-tag"></span> Manage
-                            categories</a></li>
-                    <li><a href="{{ route('books.index') }}"><span class="oi oi-book"></span> Manage books</a>
-                    </li>
-                    <li><a href="{{ route('orders.index') }}"><span class="oi oi-inbox"></span> Manage orders</a>
-                    </li> --}}
+                    <li><a href="{{ route('users.index') }}"><span class="oi oi-people"></span> Manage users</a></li>
+                    {{-- <li><a href="{{ route('categories.index') }}"><span class="oi oi-tag"></span> Manage Categories</a></li> --}}
+                    {{-- <li><a href="{{ route('books.index') }}"><span class="oi oi-book"></span> Manage books</a></li> --}}
+                    {{-- <li><a href="{{ route('orders.index') }}"><span class="oi oi-inbox"></span> Manage orders</a></li> --}}
 
                     <div class="d-block d-md-none">
                         <div class="dropdown-divider"></div>

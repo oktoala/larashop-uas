@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -15,7 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('users.index', [
+            "users" => User::paginate(10),
+        ]);
     }
 
     /**
@@ -49,7 +52,7 @@ class UserController extends Controller
         $validator['password'] = Hash::make($validator['password']);
         $validator['avatar'] = "avatars/nopic.png";
 
-        if ($request->hasFile('avatar')){
+        if ($request->hasFile('avatar')) {
             $validator['avatar'] = $request->file('avatar')->store('avatars', 'public');
         }
 
@@ -66,7 +69,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('users.show', [
+            'user' => User::findOrFail($id),
+        ]);
     }
 
     /**
@@ -77,7 +82,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('users.edit', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -89,7 +98,29 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $user = User::findOrFail($id);
+
+        $validator = $request->validate([
+            'name' => 'required|min:3',
+            'roles' => 'required',
+            'address' => 'min:3',
+            'phone' => 'min:3',
+            'status' => 'required',
+        ]);
+
+        $validator['roles'] = json_encode($validator['roles']);
+
+        if ($request->hasFile('avatar')) {
+            $validator['avatar'] = $request->file('avatar')->store('avatars', 'public');
+            if ($user->avatar !== 'avatars/nopic.png') {
+                Storage::delete('public/'.$user->avatar);
+            }
+        }
+
+        User::where('id', $id)->update($validator);
+
+        return redirect()->route('users.edit', [$id])->with('status', "User Berhasil Diupdate");
     }
 
     /**
@@ -100,6 +131,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::where('id', $id)->delete();
+
+        return redirect()->route('users.index')->with('status', "User Berhasil Dihapus");
     }
 }

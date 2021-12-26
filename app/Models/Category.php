@@ -11,4 +11,9 @@ class Category extends Model
     protected $guarded = ['id'];
     use HasFactory;
     use SoftDeletes;
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class);
+    }
 }

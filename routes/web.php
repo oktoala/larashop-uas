@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,6 @@ Route::delete('/categories/{id}/delete-permanent', [CategoryController::class, '
 
 Route::resource("users", UserController::class);
 Route::resource("categories", CategoryController::class);
+Route::resource("books", BookController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

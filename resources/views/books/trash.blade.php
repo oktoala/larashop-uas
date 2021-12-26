@@ -99,7 +99,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="10">
-                            {{ $books->appends(Request::all())->links() }}
+                            {{ $books->appends(Request::all())->links('pagination::bootstrap-4') }}
                         </td>
                     </tr>
                 </tfoot>

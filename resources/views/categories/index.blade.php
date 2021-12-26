@@ -84,7 +84,7 @@
                 <tfoot>
                     <tr>
                         <td colSpan="10">
-                            {{ $categories->appends(Request::all())->links() }}
+                            {{ $categories->appends(Request::all())->links('pagination::bootstrap-4') }}
                         </td>
                     </tr>
                 </tfoot>

@@ -36,7 +36,10 @@ Route::get('/categories/trash', [CategoryController::class, 'trash'])->name('cat
 Route::get('/categories/{id}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
 Route::delete('/categories/{id}/delete-permanent', [CategoryController::class, 'deletePermanent'])->name('categories.delete-permanent');
 
-Route::get('/books/trash', [BookFactory::class, 'trash'])->name('books.trash');
+// Books
+Route::get('/books/trash', [BookController::class, 'trash'])->name('books.trash');
+Route::post('/books/{id}/restore', [BookController::class, 'restore'])->name('books.restore');
+Route::delete('/books/{id}/delete-permanent', [BookController::class, 'deletePermanent'])->name('books.delete-permanent');
 
 Route::resource("users", UserController::class);
 Route::resource("categories", CategoryController::class);

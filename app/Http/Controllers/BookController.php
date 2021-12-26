@@ -15,9 +15,14 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $status = $request->get('status');
         $books = Book::with('categories')->paginate(10);
+
+        if ($status) {
+            $books = Book::with('categories')->where('status', strtoupper($status))->paginate(10);
+        }
 
         return view('books.index', [
             'books' => $books
@@ -162,5 +167,31 @@ class BookController extends Controller
         return view('books.trash', [
             'books' => $books
         ]);
+    }
+
+    public function restore($id)
+    {
+        $book = Book::withTrashed()->findOrFail($id);
+
+        if ($book->trashed()) {
+            $book->restore();
+            return redirect()->route('books.trash')->with('status', 'Buku Berhasil Dikembalikan');
+        }
+        return redirect()->route('books.trash')->with('status', 'Buku Tidak Ada Di Dalam Recycle Bin');
+    }
+
+    public function deletePermanent($id)
+    {
+        $book = Book::withTrashed()->findOrFail($id);
+
+        if (!$book->trashed()) {
+            return redirect()->route('books.trash')->with('status', 'Buku Tidak Ada Di Dalam Recycle Bin')->with('status_type', 'alert');
+        }
+
+        $book->categories()->detach();
+        $book->forceDelete();
+
+        return redirect()->route('books.trash')->with('status', 'Buku Berhasil Dihapus Permanen');
+
     }
 }

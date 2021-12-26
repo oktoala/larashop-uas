@@ -18,7 +18,8 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $status = $request->get('status');
-        $books = Book::with('categories')->paginate(10);
+        $keyword = $request->get("keyword") ? $request->get("keyword") : '';
+        $books = Book::with('categories')->where('title' , 'LIKE', "%$keyword%")->paginate(10);
 
         if ($status) {
             $books = Book::with('categories')->where('status', strtoupper($status))->paginate(10);

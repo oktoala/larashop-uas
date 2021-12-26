@@ -15,8 +15,12 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-6">
-            <ul class="nav nav-pills card-header-pills">
+    </div>
+    <hr class="my-3">
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav card-header-pills nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('categories.index') }}">Published</a>
                 </li>
@@ -26,16 +30,16 @@
             </ul>
         </div>
     </div>
-    <hr class="my-4">
+    <br>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-stripped">
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>Slug</th>
-                        <th>Image</th>
-                        <th>Action</th>
+                        <th><b>Nama</b></th>
+                        <th><b>Slug</b></th>
+                        <th><b>Image</b></th>
+                        <th><b>Actions</b></th>
                     </tr>
                 </thead>
                 <tbody>

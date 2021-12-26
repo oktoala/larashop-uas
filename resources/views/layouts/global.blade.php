@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="{{ asset('polished/polished.min.css') }}">
     <link rel="stylesheet" href="{{ asset('polished/iconic/css/open-iconic-bootstrap.min.css') }}">
 </head>
+
 <body>
-    <nav class="navbar navbar-expand p-0">
+    <header class="navbar sticky-top flex-md-nowrap  p-0">
         <a class="navbar-brand text-center col-xs-12 col-md-3 col-lg-2 mr-0" href="/home"> Larashop </a>
         <button class="btn btn-link d-block d-md-none" data-toggle="collapse" data-target="#sidebar-nav" role="button">
             <span class="oi oi-menu"></span>
@@ -22,6 +23,7 @@
             @if (Auth::user())
                 <button class="btn btn-link btn-link-primary dropdown-toggle" id="navbar-dropdown"
                     data-toggle="dropdown">
+                    <img style="border-radius: 50%" height="20" src="{{asset("storage/".Auth::user()->avatar)}}" alt="">
                     {{ Auth::user()->name }}
                 </button>
             @endif
@@ -37,19 +39,21 @@
                 </li>
             </div>
         </div>
-    </nav>
-
+    </header>
     <div class="container-fluid h-100 p-0">
         <div style="min-height: 100%" class="flex-row d-flex align-items-stretch m-0">
             <div class="polished-sidebar bg-light col-12 col-md-3 col-lg-2 p-0 collapse d-md-inline" id="sidebar-nav">
-
                 <ul class="polished-sidebar-menu ml-0 pt-4 p-0 d-md-block">
                     <input class="border-dark form-control d-block d-md-none mb-4" type="text" placeholder="Search"
                         aria-label="Search" />
-                    <li class="{{Request::is('home') ? "active" : ""}}"><a  href="/home"><span class="oi oi-home "></span> Home</a></li>
-                    <li class="{{Request::is('users*') ? "active" : ""}}"><a href="{{ route('users.index') }}"><span class="oi oi-people"></span> Manage users</a></li>
-                    <li class="{{Request::is('categories*') ? "active" : ""}}"><a href="{{ route('categories.index') }}"><span class="oi oi-tag"></span> Manage Categories</a></li>
-                    {{-- <li><a href="{{ route('books.index') }}"><span class="oi oi-book"></span> Manage books</a></li> --}}
+                    <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="/home"><span
+                                class="oi oi-home "></span> Home</a></li>
+                    <li class="{{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}"><span
+                                class="oi oi-people"></span> Manage users</a></li>
+                    <li class="{{ Request::is('categories*') ? 'active' : '' }}"><a
+                            href="{{ route('categories.index') }}"><span class="oi oi-tag"></span> Manage
+                            Categories</a></li>
+                    <li class="{{ Request::is('books*') ? 'active' : '' }}"><a href="{{ route('books.index') }}"><span class="oi oi-book"></span> Manage books</a></li>
                     {{-- <li><a href="{{ route('orders.index') }}"><span class="oi oi-inbox"></span> Manage orders</a></li> --}}
 
                     <div class="d-block d-md-none">

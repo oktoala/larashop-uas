@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use SebastianBergmann\Environment\Console;
 
 class CategoryController extends Controller
 {
@@ -112,6 +113,7 @@ class CategoryController extends Controller
             'slug' => 'required|unique:categories',
         ]);
 
+        $validator['updated_by'] = Auth::user()->id;
         $validator['slug'] = Str::slug($validator['slug'], '-');
 
         if ($request->hasFile('image')) {
@@ -171,5 +173,14 @@ class CategoryController extends Controller
 
             return redirect()->route('categories.index')->with('status', 'Kategori berhasil dihapus secara permanen');
         }
+    }
+
+    public function ajaxSearch(Request $request)
+    {
+        $keyword = $request->get('q');
+
+        $categories = Category::where('name', 'LIKE', "%$keyword%")->get();
+
+        return $categories;
     }
 }

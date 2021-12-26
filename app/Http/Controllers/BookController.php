@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Book;
 
 class BookController extends Controller
 {
@@ -13,7 +17,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::with('categories')->paginate(10);
+
+        return view('books.index', [
+            'books' => $books
+        ]);
     }
 
     /**
@@ -23,7 +31,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -34,7 +42,38 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = new Book();
+        $validator = $request->validate([
+            'title' => 'required|min:3',
+            'description' => 'required|min:3',
+            'author' => 'required',
+            'publisher' => 'required',
+            'price' => 'required',
+        ]);
+
+        $book->title = $validator['title'];
+        $book->description = $validator['description'];
+        $book->author = $validator['author'];
+        $book->publisher = $validator['publisher'];
+        $book->price = $validator['price'];
+
+        $book->status = $request->get('save_action');
+        $book->slug = Str::slug($validator['title']);
+        $book->created_by = Auth::user()->id;
+
+        $book->categories()->attach($request->get('categories'));
+
+        if ($request->hasFile('cover')) {
+            $book->cover = $request->file('cover')->store('books-cover', 'public');
+        }
+
+        $book->save();
+
+        if ($request->get('save_action') === 'PUBLISH') {
+            return redirect()->route('books.create')->with('status', 'Buku Berhasil Di Publish');
+        }
+
+        return redirect()->route('books.create')->with('status', 'Buku disimpan sebagai draft');
     }
 
     /**
@@ -56,7 +95,9 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::findOrFail($id);
+
+        return view('books.edit', ['book' => $book]);
     }
 
     /**
@@ -68,7 +109,38 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        $validator = $request->validate([
+            'title' => 'required|min:3',
+            'description' => 'required|min:3',
+            'author' => 'required',
+            'publisher' => 'required',
+            'price' => 'required',
+            'status' => '',
+        ]);
+
+        $book->title = $validator['title'];
+        $book->description = $validator['description'];
+        $book->author = $validator['author'];
+        $book->publisher = $validator['publisher'];
+        $book->price = $validator['price'];
+
+        $book->slug = Str::slug($book->title);
+        $book->updated_by = Auth::user()->id;
+
+        if ($request->hasFile('cover')) {
+            $book->cover = $request->file('cover')->store('books-cover', 'public');
+            if ($book->cover !== 'books-cover/nocover.png') {
+                Storage::delete('public' . $book->cover);
+            }
+        }
+
+        $book->categories()->sync($request->get('categories'));
+        $book->save();
+
+
+
+        return redirect()->route('books.edit', [$id])->with('status', 'Buku Berhasil Diupdate');
     }
 
     /**
@@ -79,6 +151,16 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Book::where('id', $id)->delete();
+
+        return redirect()->route('books.index')->with('status', 'Buku Dipindahkan ke Recycle Bin');
+    }
+
+    public function trash()
+    {
+        $books = Book::onlyTrashed()->paginate(10);
+        return view('books.trash', [
+            'books' => $books
+        ]);
     }
 }

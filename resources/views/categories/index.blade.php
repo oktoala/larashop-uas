@@ -16,14 +16,7 @@
             </form>
         </div>
         <div class="col-md-6">
-            <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('categories.index') }}">Published</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('categories.trash') }}">Trash</a>
-                </li>
-            </ul>
+            <a href="{{ route('categories.create') }}" class="btn btn-primary">Create category</a>
         </div>
     </div>
     <hr class="my-3">
@@ -36,10 +29,17 @@
             </div>
         </div>
     @endif
-
+    <br>
     <div class="row">
-        <div class="col-md-12 text-right">
-            <a href="{{ route('categories.create') }}" class="btn btn-primary">Create category</a>
+        <div class="col-md-12">
+            <ul class="nav  card-header-pills nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ route('categories.index') }}">Published</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('categories.trash') }}">Trash</a>
+                </li>
+            </ul>
         </div>
     </div>
     <br>
@@ -48,7 +48,7 @@
             <table class="table table-bordered table-stripped">
                 <thead>
                     <tr>
-                        <th><b>Name</b></th>
+                        <th><b>Nama</b></th>
                         <th><b>Slug</b></th>
                         <th><b>Image</b></th>
                         <th><b>Actions</b></th>
@@ -61,7 +61,7 @@
                             <td>{{ $category->slug }}</td>
                             <td>
                                 @if ($category->image)
-                                    <img src="{{ asset('storage/' . $category->image) }}" width="48px" />
+                                    <img src="{{ asset('storage/' . $category->image) }}" height="40px" />
                                 @else
                                     No image
                                 @endif
@@ -71,9 +71,8 @@
                                     Edit </a>
                                 <a href="{{ route('categories.show', [$category->id]) }}" class="btn btn-primary btn-sm">
                                     Show </a>
-                                <form class="d-inline"
-                                    action="{{ route('categories.destroy', [ $category->id]) }}" method="POST"
-                                    onsubmit="return confirm('Pindahkan ke Tong Sampah?')">
+                                <form class="d-inline" action="{{ route('categories.destroy', [$category->id]) }}"
+                                    method="POST" onsubmit="return confirm('Pindahkan ke Tong Sampah?')">
                                     @csrf
                                     <input type="hidden" value="DELETE" name="_method">
                                     <input type="submit" class="btn btn-danger btn-sm" value="Trash">

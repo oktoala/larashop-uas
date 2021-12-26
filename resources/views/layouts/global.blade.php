@@ -48,7 +48,7 @@
                         aria-label="Search" />
                     <li class="{{Request::is('home') ? "active" : ""}}"><a  href="/home"><span class="oi oi-home "></span> Home</a></li>
                     <li class="{{Request::is('users*') ? "active" : ""}}"><a href="{{ route('users.index') }}"><span class="oi oi-people"></span> Manage users</a></li>
-                    {{-- <li><a href="{{ route('categories.index') }}"><span class="oi oi-tag"></span> Manage Categories</a></li> --}}
+                    <li class="{{Request::is('categories*') ? "active" : ""}}"><a href="{{ route('categories.index') }}"><span class="oi oi-tag"></span> Manage Categories</a></li>
                     {{-- <li><a href="{{ route('books.index') }}"><span class="oi oi-book"></span> Manage books</a></li> --}}
                     {{-- <li><a href="{{ route('orders.index') }}"><span class="oi oi-inbox"></span> Manage orders</a></li> --}}
 

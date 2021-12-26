@@ -9,7 +9,8 @@
                 {{ session('status') }}
             </div>
         @endif
-        <form enctype="multipart/form-data" class="bg-white shadow-sm p-3" action="{{ route('users.store') }}" method="POST">
+        <form enctype="multipart/form-data" class="bg-white shadow-sm p-3" action="{{ route('users.store') }}"
+            method="POST">
             @csrf
             <label for="name">Name</label>
             <input value="{{ old('name') }}" class="form-control {{ $errors->first('name') ? 'is-invalid' : '' }}"
@@ -20,8 +21,9 @@
             <br>
 
             <label for="username">Username</label>
-            <input value="{{ old('username') }}" class="form-control {{ $errors->first('username') ? 'is-invalid' : '' }}"
-                placeholder="username" type="text" name="username" id="username" />
+            <input value="{{ old('username') }}"
+                class="form-control {{ $errors->first('username') ? 'is-invalid' : '' }}" placeholder="username"
+                type="text" name="username" id="username" />
             <div class="invalid-feedback">
                 {{ $errors->first('username') }}
             </div>
@@ -60,15 +62,13 @@
             <br>
             <label for="avatar">Avatar image</label>
             <br>
+            <img id="img" src="{{asset('storage/avatars/nopic.png')}}" alt="" width="120px" />
             <input id="avatar" name="avatar" accept="image/*" type="file"
                 class="form-control {{ $errors->first('avatar') ? 'is-invalid' : '' }}">
             <div class="invalid-feedback">
                 {{ $errors->first('avatar') }}
             </div>
-
-
             <hr class="my-4">
-
             <label for="email">Email</label>
             <input value="{{ old('email') }}" class="form-control {{ $errors->first('email') ? 'is-invalid' : '' }}"
                 placeholder="user@mail.com" type="text" name="email" id="email" />

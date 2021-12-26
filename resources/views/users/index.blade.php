@@ -19,9 +19,7 @@
             </div>
         </div>
     </form>
-
     <hr class="my-3">
-
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
@@ -34,7 +32,7 @@
         </div>
     </div>
     <br>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th><b>Name</b></th>
@@ -72,23 +70,22 @@
                     <td>
                         <a class="btn btn-info text-white btn-sm" href="{{ route('users.edit', [$user->id]) }}">Edit
                         </a>
-
-                        <a href="{{ route('users.show', [ $user->id]) }}"
-                            class="btn btn-primary btn-sm">Detail</a>
-
-                        <form onsubmit="return confirm('Yakin Mau Hapus Permanen?')" class="d-inline"
-                            action="{{ route('users.destroy', [ $user->id]) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="submit" value="Delete" class="btn btn-danger btn-sm">
-                        </form>
+                        <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-primary btn-sm">Detail</a>
+                        @if ($user->id !== Auth::user()->id)
+                            <form onsubmit="return confirm('Yakin Mau Hapus Permanen?')" class="d-inline"
+                                action="{{ route('users.destroy', [$user->id]) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
         <tfoot>
             <tr>
                 <td colspan=10>
-                    {{ $users->appends(Request::all())->links("pagination::bootstrap-4") }}
+                    {{ $users->appends(Request::all())->links('pagination::bootstrap-4') }}
                 </td>
             </tr>
         </tfoot>

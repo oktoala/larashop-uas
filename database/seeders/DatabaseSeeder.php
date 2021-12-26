@@ -28,6 +28,18 @@ class DatabaseSeeder extends Seeder
 
         $this->command->info("Berhasil Buat Admin");
 
+        User::create([
+            'username' => 'yogatra',
+            'name' => 'Oktavian Yoga',
+            'email' => 'yoga@gmail.com  ',
+            'roles' => json_encode(["CUSTOMER"]),
+            'phone' => '0823',
+            'password' => Hash::make("makan"),
+            'avatar' => 'avatars/nopic.png',
+            'address' => 'Sangasanga'
+        ]);
+
+
         User::factory(14)->create();
 
         $this->command->info("Berhasil Buat Random User");

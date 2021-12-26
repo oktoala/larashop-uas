@@ -76,17 +76,15 @@
             <br>
             Current avatar: <br>
             @if ($user->avatar)
-                <img src="{{ asset('storage/' . $user->avatar) }}" width="120px" />
+                <img id="img" src="{{ asset('storage/' . $user->avatar) }}" width="120px" />
                 <br>
             @else
                 No avatar
             @endif
             <br>
-            <input id="avatar" name="avatar" type="file" class="form-control">
+            <input  id="avatar" name="avatar" type="file" class="form-control">
             <small class="text-muted">Kosongkan jika tidak ingin mengubah avatar</small>
-
             <hr class="my-4">
-
             <label for="email">Email</label>
             <input value="{{ $user->email }}" disabled
                 class="form-control {{ $errors->first('email') ? 'is-invalid' : '' }} " placeholder="user@mail.com"
@@ -95,8 +93,8 @@
                 {{ $errors->first('email') }}
             </div>
             <br>
-
             <input class="btn btn-primary" type="submit" value="Simpan" />
         </form>
     </div>
+    <script src="{{ asset('js/script.js') }}"></script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -110,7 +111,7 @@ class CategoryController extends Controller
 
         $validator = $request->validate([
             'name' => 'required|min:3',
-            'slug' => 'required|unique:categories',
+            'slug' => ['required', Rule::unique('categories')->ignore($category->slug, 'slug')]
         ]);
 
         $validator['updated_by'] = Auth::user()->id;

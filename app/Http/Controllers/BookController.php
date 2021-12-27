@@ -19,7 +19,7 @@ class BookController extends Controller
     {
         $status = $request->get('status');
         $keyword = $request->get("keyword") ? $request->get("keyword") : '';
-        $books = Book::with('categories')->where('title' , 'LIKE', "%$keyword%")->paginate(10);
+        $books = Book::with('categories')->where('title', 'LIKE', "%$keyword%")->paginate(10);
 
         if ($status) {
             $books = Book::with('categories')->where('status', strtoupper($status))->paginate(10);
@@ -66,6 +66,7 @@ class BookController extends Controller
         $book->status = $request->get('save_action');
         $book->slug = Str::slug($validator['title']);
         $book->created_by = Auth::user()->id;
+        $book->cover = 'books-cover/nocover.png';
 
         $book->categories()->attach($request->get('categories'));
 
@@ -193,6 +194,5 @@ class BookController extends Controller
         $book->forceDelete();
 
         return redirect()->route('books.trash')->with('status', 'Buku Berhasil Dihapus Permanen');
-
     }
 }

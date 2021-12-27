@@ -25,7 +25,7 @@ class BookFactory extends Factory
             'price' => 100000,
             'status' => $this->faker->randomElement($status),
             'slug' => $slug,
-            'created_by' => $this->faker->randomBetween(1, 10),
+            'created_by' => $this->faker->numberBetween(1, 10),
             'cover' => 'books-cover/nocover.png',
         ];
     }

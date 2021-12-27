@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Book;
+use App\Models\BookCategory;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -47,5 +49,13 @@ class DatabaseSeeder extends Seeder
         Category::factory(8)->create();
 
         $this->command->info("Berhasil Buat Random Category");
+
+        Book::factory(14)->create();
+
+        $this->command->info("Berhasil Buat Random Book");
+
+        BookCategory::factory(12)->create();
+
+        $this->command->info("Berhasil Buat Random BookCategory");
     }
 }

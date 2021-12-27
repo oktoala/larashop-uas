@@ -7,9 +7,18 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Book;
+use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Gate::allows('manage-books')) return $next($request);
+
+            abort(403, 'Sorry bro, gak ada akses');
+        });
+    }
     /**
      * Display a listing of the resource.
      *

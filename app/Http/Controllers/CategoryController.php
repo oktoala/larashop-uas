@@ -8,10 +8,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 use SebastianBergmann\Environment\Console;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Gate::allows('manage-categories')) return $next($request);
+
+            abort(403, 'Sorry bro, gak ada akses');
+        });
+    }
     /**
      * Display a listing of the resource.
      *

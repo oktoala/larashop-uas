@@ -23,7 +23,14 @@
                     </form>
                 </div>
                 <div class="col-md-6">
-                    <ul class="nav nav-pills card-header-pills">
+                    <a href="{{ route('books.create') }}" style="height: 100%" class="btn btn-primary">Create book</a>
+                </div>
+            </div>
+            <hr class="my-3">
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs card-header-pills">
                         <li class="nav-item">
                             <a class="nav-link {{ Request::get('status') == null && Request::path() == 'books' ? 'active' : '' }}"
                                 href="{{ route('books.index') }}">All</a>
@@ -43,12 +50,7 @@
                     </ul>
                 </div>
             </div>
-            <hr class="my-3">
-            <div class="row mb-3">
-                <div class="col-md-12 text-right">
-                    <a href="{{ route('books.create') }}" class="btn btn-primary">Create book</a>
-                </div>
-            </div>
+            <br>
             <table class="table table-bordered table-stripped">
                 <thead>
                     <tr>

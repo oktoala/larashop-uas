@@ -16,7 +16,7 @@
             </form>
         </div>
         <div class="col-md-6">
-            <a href="{{ route('categories.create') }}" class="btn btn-primary">Create category</a>
+            <a href="{{ route('categories.create') }}" style="height: 100%" class="btn btn-primary">Create category</a>
         </div>
     </div>
     <hr class="my-3">

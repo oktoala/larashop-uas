@@ -10,7 +10,7 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <form class="shadow-sm bg-white p-3" action="{{ route('orders.update', ['id' => $order->id]) }}" method="POST">
+            <form class="shadow-sm bg-white p-3" action="{{ route('orders.update', [$order->id]) }}" method="POST">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
                 <label for="invoice_number">Invoice number</label><br>

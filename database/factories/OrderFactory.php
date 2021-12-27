@@ -13,8 +13,11 @@ class OrderFactory extends Factory
      */
     public function definition()
     {
+        $status = ['SUBMIT', 'PROCESS', 'FINISH', 'CANCEL'];
         return [
-            //
+            'user_id' => $this->faker->numberBetween(1, 14),
+            'invoice_number' => $this->faker->swiftBicNumber(),
+            'status' => $this->faker->randomElement($status),
         ];
     }
 }

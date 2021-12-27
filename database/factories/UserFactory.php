@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'username' => $this->faker->userName(),
             'name' => $this->faker->name(),
             'email' => $this->faker->email(),
-            'roles' => json_encode($this->faker->randomElements($roles)),
+            'roles' => json_encode($this->faker->randomElements($roles, $this->faker->numberBetween(1, 3))),
             'phone' => $this->faker->phoneNumber(),
             'password' => Hash::make("makan"),
             'avatar' => 'avatars/nopic.png',

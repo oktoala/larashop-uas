@@ -62,7 +62,7 @@
                             <td>{{ $order->created_at }}</td>
                             <td>{{ $order->total_price }}</td>
                             <td>
-                                <a href="{{ route('orders.edit', ['id' => $order->id]) }}" class="btn btn-info btn-sm">
+                                <a href="{{ route('orders.edit', [$order->id]) }}" class="btn btn-info btn-sm">
                                     Edit</a>
                             </td>
                         </tr>
@@ -71,7 +71,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="10">
-                            {{ $orders->appends(Request::all())->links() }}
+                            {{ $orders->appends(Request::all())->links('pagination::bootstrap-4') }}
                         </td>
                     </tr>
                 </tfoot>

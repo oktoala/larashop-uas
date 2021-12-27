@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\BookCategory;
+use App\Models\BookOrder;
+use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -57,5 +59,13 @@ class DatabaseSeeder extends Seeder
         BookCategory::factory(12)->create();
 
         $this->command->info("Berhasil Buat Random BookCategory");
+
+        Order::factory(12)->create();
+
+        $this->command->info("Berhasil Buat Random Order");
+
+        BookOrder::factory(13)->create();
+
+        $this->command->info("Berhasil Buat Random BookOrder");
     }
 }

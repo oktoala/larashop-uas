@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -39,9 +40,12 @@ class DatabaseSeeder extends Seeder
             'address' => 'Sangasanga'
         ]);
 
-
         User::factory(14)->create();
 
         $this->command->info("Berhasil Buat Random User");
+
+        Category::factory(8)->create();
+
+        $this->command->info("Berhasil Buat Random Category");
     }
 }

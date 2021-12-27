@@ -15,7 +15,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $roles = ['STAFF', 'CUSTOMER'];
+        $roles = ['ADMIN', 'STAFF', 'CUSTOMER'];
 
         return [
             'username' => $this->faker->userName(),

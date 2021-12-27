@@ -23,7 +23,8 @@
             @if (Auth::user())
                 <button class="btn btn-link btn-link-primary dropdown-toggle" id="navbar-dropdown"
                     data-toggle="dropdown">
-                    <img style="border-radius: 50%" height="20" src="{{asset("storage/".Auth::user()->avatar)}}" alt="">
+                    <img style="border-radius: 50%" height="20" src="{{ asset('storage/' . Auth::user()->avatar) }}"
+                        alt="">
                     {{ Auth::user()->name }}
                 </button>
             @endif
@@ -48,13 +49,18 @@
                         aria-label="Search" />
                     <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="/home"><span
                                 class="oi oi-home "></span> Home</a></li>
-                    <li class="{{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}"><span
-                                class="oi oi-people"></span> Manage users</a></li>
+                    <li class="{{ Request::is('users*') ? 'active' : '' }}"><a
+                            href="{{ route('users.index') }}"><span class="oi oi-people"></span> Manage users</a>
+                    </li>
                     <li class="{{ Request::is('categories*') ? 'active' : '' }}"><a
                             href="{{ route('categories.index') }}"><span class="oi oi-tag"></span> Manage
                             Categories</a></li>
-                    <li class="{{ Request::is('books*') ? 'active' : '' }}"><a href="{{ route('books.index') }}"><span class="oi oi-book"></span> Manage books</a></li>
-                    {{-- <li><a href="{{ route('orders.index') }}"><span class="oi oi-inbox"></span> Manage orders</a></li> --}}
+                    <li class="{{ Request::is('books*') ? 'active' : '' }}"><a
+                            href="{{ route('books.index') }}"><span class="oi oi-book"></span> Manage books</a>
+                    </li>
+                    <li class="{{ Request::is('books*') ? 'active' : '' }}"><a
+                            href="{{ route('orders.index') }}"><span class="oi oi-inbox"></span> Manage orders</a>
+                    </li>
 
                     <div class="d-block d-md-none">
                         <div class="dropdown-divider"></div>

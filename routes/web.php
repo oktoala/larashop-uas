@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Models\Category;
-use Database\Factories\BookFactory;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +43,6 @@ Route::delete('/books/{id}/delete-permanent', [BookController::class, 'deletePer
 Route::resource("users", UserController::class);
 Route::resource("categories", CategoryController::class);
 Route::resource("books", BookController::class);
+Route::resource('orders', OrderController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
